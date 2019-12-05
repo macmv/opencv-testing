@@ -10,6 +10,7 @@ while(True):
   ret, frame = cap.read()
   gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
   # Our operations on the frame come here
+  # this code is for canny edging the blue umbrella I have
   hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
   blue = cv2.inRange(hsv,(80,100,100),(110,255,255))
   blur = cv2.GaussianBlur(blue, (5,5), 0)
