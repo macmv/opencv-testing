@@ -7,7 +7,8 @@ cap = cv2.VideoCapture(0)
 
 while(True):
   # Capture frame-by-frame
-  ret, frame = cap.read()
+  ret, frame1 = cap.read()
+  frame = cv2.flip(frame1,1)
   #gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
   #ret, thres = cv2.threshold(gray, 127,255,cv2.THRESH_BINARY)
   # Our operations on the frame come here
@@ -42,7 +43,9 @@ while(True):
       wMax = w
     if h > hMax:
       hMax = h
-  img = cv2.rectangle(drawing,(x,y),(x+wMax,y+hMax),(0,255,0),2)
+  img = cv2.rectangle(frame,(x,y),(x+wMax,y+hMax),(0,255,0),2)
+  canny = cv2.rectangle(canny,(x,y),(x+wMax,y+hMax),(0,255,0),2)
+
   cv2.imshow('frame', canny)
   cv2.imshow('',img)
   if cv2.waitKey(1) & 0xFF == ord('q'):
