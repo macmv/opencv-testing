@@ -5,15 +5,19 @@ import cv2
 import numpy as np
 
 # turn on camera at port 0
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 # width of the paper
 KNOWN_WIDTH = 11.0
 #the focallength of the camera
 #It is currently defaulted to my camera
 #this number will vary due to different camera modules 
-focalLength = 800
+#focalLength = 800
+#webCam focallength
+focalLength = 1200
 #vertical distance
 distanceV = 0
+#horizontal Shift
+didtanceH = 0
 
 
 def distance_to_camera(knownWidth, focalLength, perWidth):
@@ -53,12 +57,15 @@ while(True):
 			max_cnt = rect
 
 	x,y,w,h	= cv2.boundingRect(max_box)
-
+	imageW = frame.shape[1]
   
 	# only draw the contour and calculate distance of the max_area has been set
 	if max_area > -1:
 		cv2.drawContours(frame, [max_box], 0, (0,255,0), 2)
 		distanceV = distance_to_camera(KNOWN_WIDTH, focalLength, w)
+		default_W = (KNOWN_WIDTH * focalLength) / distanceV
+		default_Shift = (imageW / 2) - (default_W / 2)
+		distanceH = (default_Shift - x) / focalLength * distanceV
     
 
   #show distance
