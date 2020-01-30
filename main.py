@@ -18,7 +18,7 @@ KNOWN_WIDTH = 5.5
 #laptop focallength 
 #focalLength = 800
 #webCam focallength
-focalLength = 1200
+focalLength = 690
 
 
 
@@ -29,7 +29,7 @@ def distance_to_camera(knownWidth, focalLength, perWidth):
 while(True):
 	# read frame from camera
 	ret, frame = cap.read()
-  #grayscale it and blur it and edge it
+    #grayscale it and blur it and edge it
 	gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 	gray = cv2.GaussianBlur(gray, (5, 5), 0)
 	edged = cv2.Canny(gray, 35, 125)
